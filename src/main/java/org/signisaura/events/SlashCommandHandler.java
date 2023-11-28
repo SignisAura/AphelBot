@@ -105,13 +105,12 @@ public class SlashCommandHandler {
                         }
                     }
                 }
+                 event.getChannel().purgeMessages(messages);
+                 sendEphemeralMessage(event, "The messages have been deleted!");
             }
             else {
                 sendEphemeralMessage(event, "The list is empty!");
              }
-
-             event.getChannel().purgeMessages(messages);
-             sendEphemeralMessage(event, "The messages have been deleted!");
          }
     }
 
