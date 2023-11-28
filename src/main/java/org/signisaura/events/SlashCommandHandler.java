@@ -6,7 +6,9 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.UserSnowflake;
+import net.dv8tion.jda.api.entities.channel.Channel;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.requests.restaction.pagination.BanPaginationAction;
 import org.signisaura.safe.Safe;
@@ -95,24 +97,22 @@ public class SlashCommandHandler {
          }
          else {
              ArrayList<Message> messages = new ArrayList<>();
+             MessageChannelUnion channel = event.getChannel();
 
-             if (!event.getChannel().getIterableHistory().cache(false).isEmpty()) {
-                while (count > 0) {
-                    for (Message msg : event.getChannel().getIterableHistory().cache(false)) {
-                        if (!msg.isPinned()) {
-                            messages.add(msg);
-                            count--;
-                        }
-                    }
-                }
-                 event.getChannel().purgeMessages(messages);
-                 sendEphemeralMessage(event, "The messages have been deleted!");
-            }
-            else {
-                sendEphemeralMessage(event, "The list is empty!");
+             for (Message msg : channel.getIterableHistory().cache(false)) {
+                 if (count <= 0) {
+                     break;
+                 }
+                 if (!msg.isPinned()) {
+                     count--;
+                     messages.add(msg);
+                 }
              }
+
+             channel.purgeMessages(messages);
+             sendEphemeralMessage(event, "The messages have been deleted!");
          }
-    }
+     }
 
     // ban command
     public void ban(SlashCommandInteractionEvent event) {
