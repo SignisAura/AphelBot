@@ -21,6 +21,5 @@ public class Events extends ListenerAdapter {
         guild.createTextChannel("aphel-auditlog")
                 .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
                 .queue();
-
     }
 }
