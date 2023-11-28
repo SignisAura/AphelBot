@@ -19,7 +19,7 @@ public class ChatCommandHandler {
     private static final String prefix = "!";
 
     // Is bot owner?
-    public boolean isCreator(@NotNull MessageReceivedEvent event) {
+    public boolean isCreator(MessageReceivedEvent event) {
         return event.getAuthor().equals(event.getJDA().getUserById(Safe.getIdOwner()));
     }
 
@@ -36,7 +36,7 @@ public class ChatCommandHandler {
     }
 
     // execute chatcommands followed by !
-    public void executeChatCommands(@NotNull MessageReceivedEvent event) {
+    public void executeChatCommands(MessageReceivedEvent event) {
         Message msg = event.getMessage();
         String messageString = msg.getContentRaw().toLowerCase(Locale.ROOT);
 
@@ -54,7 +54,7 @@ public class ChatCommandHandler {
     // Enable Slashcommands per server
     public void enableSlashCommands(@NotNull MessageReceivedEvent event) {
         if (isCreator(event)) {
-            event.getGuild().updateCommands().addCommands(getCommandDataArray());
+            event.getGuild().updateCommands().addCommands(getCommandDataArray()).queue();
             event.getChannel().sendMessage("Slashcommands are enabled!").queue();
         }
         else {
@@ -63,7 +63,7 @@ public class ChatCommandHandler {
     }
 
     // Disable Slashcommands per server
-    public void disableSlashCommands(@NotNull MessageReceivedEvent event) {
+    public void disableSlashCommands(MessageReceivedEvent event) {
         if (isCreator(event)) {
             event.getGuild().updateCommands().addCommands().queue();
             event.getChannel().sendMessage("Slashcommands are disabled!").queue();
