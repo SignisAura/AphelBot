@@ -41,11 +41,11 @@ public class ChatCommandHandler {
         String messageString = msg.getContentRaw().toLowerCase(Locale.ROOT);
 
         switch (messageString) {
-            case prefix + "enableSlash":
+            case prefix + "enableslash":
                 enableSlashCommands(event);
                 break;
 
-            case prefix + "disableSlash":
+            case prefix + "disableslash":
                 disableSlashCommands(event);
                 break;
         }
