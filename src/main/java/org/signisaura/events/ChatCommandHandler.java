@@ -85,15 +85,6 @@ public class ChatCommandHandler {
         commandDataArrayList.add(new CommandDataImpl("pardon", "unbans the user.")
                 .addOption(OptionType.USER, "user", "the user to be unbanned", true));
         commandDataArrayList.add(new CommandDataImpl("banlist", "retrieves a list of banned users."));
-        commandDataArrayList.add(new CommandDataImpl("kick", "kicks an user from the server.")
-                .addOption(OptionType.USER, "member", "the user to be kicked", true)
-                .addOption(OptionType.STRING, "reason", "why should the user be kicked?", true));
-        commandDataArrayList.add(new CommandDataImpl("mute", "puts the user in time out for an amount of time.")
-                .addOption(OptionType.USER, "member", "the member to be put in time out.", true)
-                .addOption(OptionType.INTEGER, "duration", "the duration of the time out.", true)
-                .addOption(OptionType.STRING, "time unit", "choose from: minutes, hours, days", true, true));
-        commandDataArrayList.add(new CommandDataImpl("unmute", "removes a time out from the user.")
-                .addOption(OptionType.USER, "member", "the member from whom the time out will be removed.", true));
 
         return commandDataArrayList;
     }
